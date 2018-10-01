@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>spl0it</title>
+		<description>Stylish Jekyll Theme</description>
+		<link>/</link>
+		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
+		
+			<item>
+				<title>Welcome!</title>
+				<description>&lt;p&gt;I’ll post here write-ups of CTFs challenges from various of categories.&lt;/p&gt;
+
+</description>
+				<pubDate>Mon, 01 Oct 2018 00:00:00 +0300</pubDate>
+				<link>/general/ctfs/2018/10/01/Welcome.html</link>
+				<guid isPermaLink="true">/general/ctfs/2018/10/01/Welcome.html</guid>
+			</item>
+		
+			<item>
+				<title>Welcome!</title>
+				<description>&lt;p&gt;I’ll post here write-ups of CTFs challenges from various of categories.&lt;/p&gt;
+
+</description>
+				<pubDate>Fri, 15 Nov 2013 00:00:00 +0200</pubDate>
+				<link>/general/ctfs/2013/11/15/hello-world.html</link>
+				<guid isPermaLink="true">/general/ctfs/2013/11/15/hello-world.html</guid>
+			</item>
+		
+	</channel>
+</rss>
