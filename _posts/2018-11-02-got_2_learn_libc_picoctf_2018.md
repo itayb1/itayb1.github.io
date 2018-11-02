@@ -1,3 +1,13 @@
+---
+layout: post
+title: Binary Exploitation: got-to-learn-libc (250) - PicoCTF 2018
+categories: [general, CTFs]
+tags: [CTFs, picoCTF2018]
+fullview: true
+comments: true
+---
+
+
 # Binary Exploitation: got-to-learn-libc (250) - PicoCTF 2018
 
 
