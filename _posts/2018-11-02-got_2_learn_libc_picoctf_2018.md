@@ -7,6 +7,8 @@ fullview: true
 comments: true
 ---
 
+# Binary Exploitation: got-to-learn-libc (250) - PicoCTF 2018
+
 So this challenge was a great introduction for the concept of ret-2-libc.
 As we run the binary we were given a several addresses from libc, that may be really  useful in our exploit.
 > Here are some useful addresses:
@@ -49,10 +51,9 @@ So the stack should look like this:
 |something|
 |**Higher Memory Address**|
 
+** **
 
-**And After:**
-
-| |
+|After|
 |---|
 |**Lower Memory Address**|
 |System's Address|
@@ -60,8 +61,7 @@ So the stack should look like this:
 |"/bin/sh" Address|
 |**Higher Memory Address**|
 
-
-Notice that we use a fake return address because when a function is called the arguments are pushed first, and then the return address is pushed as well.
+* Notice that we use a fake return address because when a function is called the arguments are pushed first, and then the return address is pushed as well.
 
 
 # Getting the address of system 
