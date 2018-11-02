@@ -7,10 +7,6 @@ fullview: true
 comments: true
 ---
 
-
-# Binary Exploitation: got-to-learn-libc (250) - PicoCTF 2018
-
-
 So this challenge was a great introduction for the concept of ret-2-libc.
 As we run the binary we were given a several addresses from libc, that may be really  useful in our exploit.
 > Here are some useful addresses:
