@@ -5,10 +5,14 @@ So this challenge was a great introduction for the concept of ret-2-libc.
 As we run the binary we were given a several addresses from libc, that may be really  useful in our exploit.
 > Here are some useful addresses:
 > 
->puts: 0xf7e2bb40
+> puts: 0xf7e2bb40
+>
 > fflush 0xf7e29cb0
+>
 > read: 0xf7eaacb0
+>
 > write: 0xf7eaad80
+>
 > useful_string: 0x56575030
 
 *Keep in mind that this addresses are random when running the binary on  the remote server due to ASLR.
@@ -17,6 +21,7 @@ So apparently we get the addresses of some functions that can be found in libc, 
 By examine the binary with GDB we can view the content of this particular address, and we found out that it points to the following string
 
 >  gdb-peda$ x/s 0x56557030
+>
 > 0x56557030 <**useful_string**>: "/bin/sh"
 
 Knowing that our goal is getting a shell, having the address of `"/bin/sh"` is very useful. Basically our goal is to find a way to call `system` with `"/bin/sh"`, as it will result with a shell on the remote server, and the ability to view the content of flag.txt.
@@ -29,6 +34,7 @@ What we can do, however, is to use the fact we have a buffer overflow to create 
 
 
 So the stack should look like this:
+
 |Before|
 |---|
 |**Lower Memory Address**|
