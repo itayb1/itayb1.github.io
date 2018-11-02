@@ -50,7 +50,9 @@ So the stack should look like this:
 |**Higher Memory Address**|
 
 
-|After |
+**And After:**
+
+| |
 |---|
 |**Lower Memory Address**|
 |System's Address|
@@ -58,7 +60,8 @@ So the stack should look like this:
 |"/bin/sh" Address|
 |**Higher Memory Address**|
 
-Notice that we use a fake return address because when a function is called the arguments are pushed first, and than the return address is pushed as well.
+
+Notice that we use a fake return address because when a function is called the arguments are pushed first, and then the return address is pushed as well.
 
 
 # Getting the address of system 
@@ -67,7 +70,7 @@ Basically, we only need an libc address of one function.
 As I mentioned earlier there is a possibility  we have an ASLR protection on the remote server so the address of `system` is different each time, but the difference between the address of another libc function (`puts` for example) and the address of `system` is always the same - offsets don't change.
 
 Since we have access to libc in the path `lib/i386-linux-gnu/libc.so.6`we can use `readelf` to get the offset of puts from the `libc base address` and than adding to that address the offset of `system` which will give us the long-awaited address of `system`.
-So `readelf -s lib/i386-linux-gnu/libc.so.6 | grep puts` gave us the offset `0x5f140`, and `readelf -s lib/i386-linux-gnu/libc.so.6 | grep system` gave us the offset 0x3a940. 
+So `readelf -s lib/i386-linux-gnu/libc.so.6 | grep puts` gave us the offset `0x5f140`, and `readelf -s lib/i386-linux-gnu/libc.so.6 | grep system` gave us the offset `0x3a940`. 
 
 # The script
 ```python
