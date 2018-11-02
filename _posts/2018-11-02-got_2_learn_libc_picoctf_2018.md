@@ -1,13 +1,10 @@
 ---
 layout: post
-title: Binary Exploitation: got-to-learn-libc (250) - PicoCTF 2018
+title: Binary Exploitation - got-2-learn-libc (250) - PicoCTF 2018
 categories: [general, CTFs]
 tags: [CTFs, picoCTF2018]
-fullview: true
 comments: true
 ---
-
-# Binary Exploitation: got-to-learn-libc (250) - PicoCTF 2018
 
 So this challenge was a great introduction for the concept of ret-2-libc.
 As we run the binary we were given a several addresses from libc, that may be really  useful in our exploit.
@@ -69,7 +66,7 @@ It's about time we'll take advantage of the functions' address we got.
 Basically, we only need an libc address of one function.
 As I mentioned earlier there is a possibility  we have an ASLR protection on the remote server so the address of `system` is different each time, but the difference between the address of another libc function (`puts` for example) and the address of `system` is always the same - offsets don't change.
 
-Since we have access to libc in the path `lib/i386-linux-gnu/libc.so.6`we can use `readelf` to get the offset of puts from the `libc base address` and than adding to that address the offset of `system` which will give us the long-awaited address of `system`.
+Since we have access to libc in the path `lib/i386-linux-gnu/libc.so.6`we can use `readelf` to get the offset of `puts` and calculating the `libc base address`, and then adding to that address the offset of `system` which will give us the long-awaited address of `system`.
 So `readelf -s lib/i386-linux-gnu/libc.so.6 | grep puts` gave us the offset `0x5f140`, and `readelf -s lib/i386-linux-gnu/libc.so.6 | grep system` gave us the offset `0x3a940`. 
 
 # The script
