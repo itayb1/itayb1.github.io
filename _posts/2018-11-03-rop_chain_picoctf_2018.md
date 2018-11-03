@@ -26,7 +26,7 @@ Arch:     i386-32-little
 ```
 Apparently there is a NX bit enabled, meaning we cannot use BoF to write shell-code on the stack and execute it. However, as the name of the challenge implies, we can use the **ROP** (Return Orientated Programming) technique to overcome this protection. 
 ROP technique allows an attacker who has control of the call stack to hijack program control flow and then executes carefully chosen machine instruction sequences that are already present in the machine's memory, called "gadgets", as each gadget ends with a return instruction.
-* You can read more about ROP in this article for CTF101 - [ROP - CTF101](https://ctf101.org/binary-exploitation/return-oriented-programming/).
+* You can read more about ROP in this article of CTF101 - [ROP - CTF101](https://ctf101.org/binary-exploitation/return-oriented-programming/).
 
 Anyway, We're going to need to investigate further, and examine the source code is a good place to start.
 * Note that in this write-up I'll use the `rop.c` file that was given for simplicity purposes. I do recommend to try use GDB or and other disassembler to analyze the binary before taking a look at the source code.
@@ -113,6 +113,7 @@ The most interesting function is probably `flag`, which in the beginning of it w
 |win1 == True / 1|
 |win2 == True / 1|
 |arg_check2 == `0xDEADBAAD`|
+
 
 So in order to fulfill the first condition we need to jump to `win1_function`, and in order to fulfill the second condition we need to jump to `win2_function`passing the value `0xBAAAAAAD` as its argument, and that's only after `win1_function` was executed.
 After that we are going to need to jump right to `flag` and pass it the value `0xDEADBAAD` as an argument. 
