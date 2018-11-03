@@ -6,20 +6,25 @@ tags: [CTFs, picoCTF2018, Web Exploitation]
 comments: true
 ---
 
-The first thing I tried  is to check for an SQLI vulnerability by sending `'` as my payload. Lucky enough, it seems there is one, and even more than that - we actually get to see the SQL query  that was made and the error it caused. Knowing that we can already tell it is probably an error-based SQL injection challenge.
+The first thing I tried  is to check for an SQLI vulnerability by sending `'` as my payload. 
+Lucky enough, it seems there is one, and even more than that - we actually get to see the SQL query  that was made and the error it caused. 
+Knowing that we can already tell it is probably an error-based SQL injection challenge.
 
 Here is the result: 
-`SQL query: SELECT * FROM answers WHERE answer='''  
-Warning: SQLite3::query(): Unable to prepare statement: 1, unrecognized token: "'''" in **/problems/a-simple-question_2_7cdb92e4585fe82f01b576698a830c1e/webroot/answer2.php** on line 15 
-` 
+```text
+SQL query: SELECT * FROM answers WHERE answer='''
+Warning: SQLite3::query(): Unable to prepare statement: 1, unrecognized token: "'''" in **/problems/a-simple-question_2_7cdb92e4585fe82f01b576698a830c1e/webroot/answer2.php** on line 15
 
-`Fatal error: Uncaught Error: Call to a member function fetchArray() on boolean in /problems/a-simple-question_2_7cdb92e4585fe82f01b576698a830c1e/webroot/answer2.php:17 Stack trace: #0 {main} thrown in /problems/a-simple-question_2_7cdb92e4585fe82f01b576698a830c1e/webroot/answer2.php on line 17`
+Fatal error: Uncaught Error: Call to a member function fetchArray() on boolean in /problems/a-simple-question_2_7cdb92e4585fe82f01b576698a830c1e/webroot/answer2.php:17 Stack trace: #0 {main} thrown in /problems/a-simple-question_2_7cdb92e4585fe82f01b576698a830c1e/webroot/answer2.php on line 17
+```
 
 So by that we understand that we are dealing with an SQLite3 DB, and we try to retrieve `answer` from the `answers` table.
 Let's try to inject `'or 1=1-- -` as this payload will prevent an error - 
-`SQL query: SELECT * FROM answers WHERE answer=''or 1=1-- -'`
-`You are so close.`
-So from that we can understand that when our SQL query is true, we of course don't get an error, but instead we get the string `"You are so close"`.
+```text
+SQL query: SELECT * FROM answers WHERE answer=''or 1=1-- -'
+You are so close.
+```
+So from that we can understand that when our SQL query is true, we of course don't get an error, but instead we get the string `"You are so close"`. 
 We can use that to slowly **brute-force** the answer.
 
 Basically we want to use the following payload, and each time we'll try to guess one letter that is in our answer, and we'll be able to tell if it is based on the fact that we can either get an error when false, or the string `"You are so close"` when true.
