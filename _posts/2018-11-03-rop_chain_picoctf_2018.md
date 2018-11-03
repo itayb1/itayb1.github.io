@@ -107,6 +107,7 @@ int main(int argc, char **argv){
 ```
 Looking at `vuln` we can immediately see that the BoF is caused due to the usage of `gets` function, which doesn't have any length check.
 The most interesting function is probably `flag`, which in the beginning of it we can see that the flag is been extracted from `flag.txt`, but it'll be printed out only if the following is true:
+
 |Conditions|
 |---|
 |win1 == True / 1|
@@ -120,6 +121,7 @@ To accomplish all of that we can use the ROP technique.
 The fact we have a BoF vulnerability allows us to overwrite the return address and what's beyond that to chain several ROP gadgets together (in this case our "gadgets" are`win1/win2_function` and `flag`) resulting in several fake function stack frames. That would cause the program to jump from one function to another in the right order so all conditions are fulfilled.
  
 Based on what said above, we want the stack to look like the following when returning from `vuln`:
+
 |Before|
 |---|
 |**Lower Memory Addresses**|
